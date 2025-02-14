@@ -1276,13 +1276,61 @@ mask-image: linear-gradient(to top, transparent 40%, #105826 80%) !important;
 }
   </style>
 </body>
+
+<!-- ตัวเล่น YouTube แบบซ่อน -->
+<div id="player" style="position: absolute; width: 0; height: 0; overflow: hidden;"></div>
+
+
 <script>
     onload = () => {
-      const c = setTimeout(() => {
+      // ทำให้คลาส "not-loaded" หายไปหลังจาก 1 วินาที
+      setTimeout(() => {
         document.body.classList.remove("not-loaded");
-        clearTimeout(c);
       }, 1000);
+  
+      // โหลด YouTube API เพียงครั้งเดียว
+      if (!window.YT) {
+        let tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        let firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      }
     };
+  
+    var player;
+    function onYouTubeIframeAPIReady() {
+      if (!document.getElementById('player')) {
+        let div = document.createElement('div');
+        div.id = 'player';
+        div.style.position = 'absolute';
+        div.style.width = '0';
+        div.style.height = '0';
+        div.style.overflow = 'hidden';
+        document.body.appendChild(div);
+      }
+  
+      player = new YT.Player('player', {
+        height: '0',
+        width: '0',
+        videoId: 'H8G-bOzO5AY',
+        playerVars: {
+          'autoplay': 1,
+          'loop': 1,
+          'playlist': 'H8G-bOzO5AY',
+          'controls': 0,
+          'disablekb': 1,
+          'modestbranding': 1,
+          'rel': 0
+        },
+        events: {
+          'onReady': function(event) {
+            event.target.setVolume(100); // ปรับระดับเสียง 100%
+          }
+        }
+      });
+    }
   </script>
+  
+
 
 </html>
