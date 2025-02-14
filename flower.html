@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roses</title>
+    <link rel="icon" type="image/x-icon" href="flower.ico">
     <link rel="style.css" href="">
 </head>
   
@@ -1288,7 +1289,7 @@ mask-image: linear-gradient(to top, transparent 40%, #105826 80%) !important;
         document.body.classList.remove("not-loaded");
       }, 1000);
   
-      // โหลด YouTube API เพียงครั้งเดียว
+      // โหลด YouTube API ถ้ายังไม่ได้โหลด
       if (!window.YT) {
         let tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
@@ -1314,22 +1315,24 @@ mask-image: linear-gradient(to top, transparent 40%, #105826 80%) !important;
         width: '0',
         videoId: 'H8G-bOzO5AY',
         playerVars: {
-          'autoplay': 1,
-          'loop': 1,
-          'playlist': 'H8G-bOzO5AY',
-          'controls': 0,
-          'disablekb': 1,
-          'modestbranding': 1,
-          'rel': 0
+          'autoplay': 1,  // เล่นอัตโนมัติ
+          'loop': 1,      // เล่นซ้ำ
+          'playlist': 'H8G-bOzO5AY', // ต้องใส่เพื่อให้ loop ทำงาน
+          'controls': 0,  // ไม่มีปุ่มควบคุม
+          'disablekb': 1, // ปิดการควบคุมคีย์บอร์ด
+          'modestbranding': 1, // ลดโลโก้ YouTube
+          'rel': 0,       // ไม่แสดงวิดีโอแนะนำ
+          'start': 17     // เริ่มเล่นที่วินาที 17
         },
         events: {
           'onReady': function(event) {
-            event.target.setVolume(100); // ปรับระดับเสียง 100%
+            event.target.setVolume(100);  // ปรับระดับเสียง 100%
           }
         }
       });
     }
   </script>
+  
   
 
 
